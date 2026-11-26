@@ -1,3 +1,14 @@
+
 <resources>
-    <string name="app_name">ObligatorioAppsMoviles</string>
+    <string name="app_name">Mi Recetario</string>
+
+    <string name="titulo_inicio">Mi Recetario</string>
+    <string name="subtitulo_inicio">Todas tus recetas favoritas en un solo lugar</string>
+
+    <string name="mis_recetas">Mis recetas</string>
+    <string name="buscar_recetas">Buscar recetas</string>
+    <string name="agregar_receta">Agregar receta</string>
+
+    <string name="ultima_receta">Última receta: ninguna</string>
+    <string name="ultima_receta_formato">Última receta: %1$s</string>
 </resources>
