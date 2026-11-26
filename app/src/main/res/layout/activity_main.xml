@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/boca_azul">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/titulo_inicio"
+            android:textSize="34sp"
+            android:textStyle="bold"
+            android:textColor="@color/boca_oro"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/subtitulo_inicio"
+            android:textSize="16sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:layout_marginBottom="40dp"/>
+
+        <Button
+            android:id="@+id/btnMisRecetas"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/mis_recetas"
+            android:textStyle="bold"
+            android:textColor="@color/boca_azul"
+            android:backgroundTint="@color/boca_oro"/>
+
+        <Button
+            android:id="@+id/btnBuscarRecetas"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/buscar_recetas"
+            android:textStyle="bold"
+            android:textColor="@color/boca_azul"
+            android:backgroundTint="@color/boca_oro"/>
+
+        <Button
+            android:id="@+id/btnAgregarReceta"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/agregar_receta"
+            android:textStyle="bold"
+            android:textColor="@color/boca_azul"
+            android:backgroundTint="@color/boca_oro"/>
+
+        <TextView
+            android:id="@+id/txtUltimaReceta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/ultima_receta"
+            android:textSize="14sp"
+            android:textColor="@color/white"
+            android:gravity="center"/>
+
+    </LinearLayout>
+</ScrollView>
