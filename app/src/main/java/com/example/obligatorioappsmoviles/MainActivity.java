@@ -5,6 +5,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.content.SharedPreferences;
 import android.widget.TextView;
+import android.content.Intent;
+import android.widget.Button;
 
 public class MainActivity extends Activity {
 
@@ -14,10 +16,20 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Cargamos el diseño de la pantalla principal
         setContentView(R.layout.activity_main);
 
-        // Asociamos el componente Java con el XML
+
+        Button btnAgregar = findViewById(R.id.btnAgregarReceta);
+
+        btnAgregar.setOnClickListener(v -> {
+            Intent intent = new Intent(
+                    MainActivity.this,
+                    AgregarRecetaActivity.class
+            );
+
+            startActivity(intent);
+        });
+
         txtUltimaReceta = findViewById(R.id.txtUltimaReceta);
     }
 
@@ -25,14 +37,12 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
 
-        // Recuperamos las preferencias guardadas
         SharedPreferences preferences = getSharedPreferences(
                 "MiRecetarioPrefs", MODE_PRIVATE);
 
         String ultimaReceta = preferences.getString(
                 "ultima_receta", "");
 
-        // Mostramos la última receta guardada
         if (ultimaReceta.isEmpty()) {
             txtUltimaReceta.setText(R.string.ultima_receta);
         } else {

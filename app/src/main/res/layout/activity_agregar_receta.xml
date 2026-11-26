@@ -1,0 +1,82 @@
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/boca_azul">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/titulo_agregar"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@color/boca_oro"
+            android:gravity="center"
+            android:layout_marginBottom="32dp"/>
+
+        <EditText
+            android:id="@+id/edtNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_nombre"
+            android:inputType="textCapSentences"
+            android:textColor="@color/white"
+            android:textColorHint="#B0C5DB"
+            android:backgroundTint="@color/boca_oro"/>
+
+        <EditText
+            android:id="@+id/edtIngredientes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:hint="@string/hint_ingredientes"
+            android:inputType="textMultiLine"
+            android:minLines="3"
+            android:gravity="top"
+            android:textColor="@color/white"
+            android:textColorHint="#B0C5DB"
+            android:backgroundTint="@color/boca_oro"/>
+
+        <EditText
+            android:id="@+id/edtPreparacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:hint="@string/hint_preparacion"
+            android:inputType="textMultiLine"
+            android:minLines="4"
+            android:gravity="top"
+            android:textColor="@color/white"
+            android:textColorHint="#B0C5DB"
+            android:backgroundTint="@color/boca_oro"/>
+
+        <Button
+            android:id="@+id/btnValidar"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/validar_receta"
+            android:textStyle="bold"
+            android:textColor="@color/boca_azul"
+            android:backgroundTint="@color/boca_oro"/>
+
+        <Button
+            android:id="@+id/btnVolverAgregar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/volver"
+            android:textStyle="bold"
+            android:textColor="@color/boca_azul"
+            android:backgroundTint="@color/boca_oro"/>
+
+    </LinearLayout>
+</ScrollView>
