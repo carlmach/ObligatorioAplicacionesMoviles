@@ -8,6 +8,8 @@ import android.widget.TextView;
 import android.content.Intent;
 import android.widget.Button;
 
+
+
 public class MainActivity extends Activity {
 
     private TextView txtUltimaReceta;
@@ -17,6 +19,18 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
+
+        Button btnMisRecetas = findViewById(R.id.btnMisRecetas);
+
+        btnMisRecetas.setOnClickListener(v -> {
+            Intent intent = new Intent(
+                    MainActivity.this,
+                    MisRecetasActivity.class
+            );
+
+            startActivity(intent);
+        });
 
 
         Button btnAgregar = findViewById(R.id.btnAgregarReceta);

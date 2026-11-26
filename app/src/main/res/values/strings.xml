@@ -18,5 +18,7 @@
     <string name="error_preparacion">Ingresá la preparación</string>
     <string name="formulario_valido">Formulario válido. Pendiente guardar en SQLite.</string>
     <string name="volver">Volver</string>
+    <string name="titulo_mis_recetas">Mis recetas</string>
+    <color name="boca_azul_tarjeta">#10457A</color>
 
 </resources>
