@@ -2,8 +2,11 @@
 package com.example.obligatorioappsmoviles;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -12,20 +15,26 @@ import java.util.ArrayList;
 
 public class MisRecetasActivity extends Activity {
 
-    private ArrayList<RecetaListado> listaRecetas;
+    private ArrayList<Receta> listaRecetas;
     private RecetaAdapter adapter;
+    private TextView txtSinRecetas;
+    private RecetaDao dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mis_recetas);
 
+        dao = new RecetaDao(this);
+
         RecyclerView recyclerRecetas =
                 findViewById(R.id.recyclerRecetas);
 
+        txtSinRecetas = findViewById(R.id.txtSinRecetas);
+
         listaRecetas = new ArrayList<>();
 
-        adapter = new RecetaAdapter(listaRecetas);
+        adapter = new RecetaAdapter(listaRecetas, this::abrirDetalle);
 
         recyclerRecetas.setLayoutManager(
                 new LinearLayoutManager(this)
@@ -44,22 +53,20 @@ public class MisRecetasActivity extends Activity {
         super.onResume();
 
         listaRecetas.clear();
-
-        listaRecetas.add(new RecetaListado(
-                "Milanesa napolitana",
-                "Carne, queso y tomate"
-        ));
-
-        listaRecetas.add(new RecetaListado(
-                "Tortilla de papas",
-                "Papas, huevo y cebolla"
-        ));
-
-        listaRecetas.add(new RecetaListado(
-                "Fideos con salsa",
-                "Pasta y salsa de tomate"
-        ));
+        listaRecetas.addAll(dao.listarTodas());
 
         adapter.notifyDataSetChanged();
+
+        txtSinRecetas.setVisibility(
+                listaRecetas.isEmpty() ? View.VISIBLE : View.GONE
+        );
+    }
+
+    private void abrirDetalle(Receta receta) {
+
+        Intent intent = new Intent(this, DetalleRecetaActivity.class);
+        intent.putExtra(DetalleRecetaActivity.EXTRA_ID_RECETA, receta.getId());
+
+        startActivity(intent);
     }
 }

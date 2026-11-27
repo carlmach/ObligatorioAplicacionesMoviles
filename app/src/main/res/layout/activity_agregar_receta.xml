@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:fitsSystemWindows="true"
     android:background="@color/boca_azul">
 
     <LinearLayout
@@ -30,6 +31,23 @@
             android:inputType="textCapSentences"
             android:textColor="@color/white"
             android:textColorHint="#B0C5DB"
+            android:backgroundTint="@color/boca_oro"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@string/label_categoria"
+            android:textColor="@color/boca_oro"
+            android:textStyle="bold"
+            android:textSize="16sp"/>
+
+        <Spinner
+            android:id="@+id/spnCategoria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:padding="8dp"
             android:backgroundTint="@color/boca_oro"/>
 
         <EditText

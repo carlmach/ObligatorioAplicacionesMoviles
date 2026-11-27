@@ -4,31 +4,40 @@ package com.example.obligatorioappsmoviles;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
 public class RecetaAdapter extends RecyclerView.Adapter<RecetaAdapter.ViewHolderRecetas> {
 
-    private ArrayList<RecetaListado> listaItems;
-
-    public RecetaAdapter(ArrayList<RecetaListado> lista) {
-        this.listaItems = lista;
+    public interface AlTocarReceta {
+        void onReceta(Receta receta);
     }
 
+    private final ArrayList<Receta> listaItems;
+    private final AlTocarReceta listener;
+
+    public RecetaAdapter(ArrayList<Receta> lista, AlTocarReceta listener) {
+        this.listaItems = lista;
+        this.listener = listener;
+    }
 
     public class ViewHolderRecetas extends RecyclerView.ViewHolder {
 
-        private TextView txtNombre;
-        private TextView txtIngredientes;
+        private final ImageView imgReceta;
+        private final TextView txtNombre;
+        private final TextView txtIngredientes;
 
         public ViewHolderRecetas(View itemView) {
             super(itemView);
 
+            imgReceta = itemView.findViewById(R.id.imgReceta);
             txtNombre = itemView.findViewById(R.id.txtNombreReceta);
             txtIngredientes = itemView.findViewById(R.id.txtIngredientesReceta);
         }
@@ -49,19 +58,42 @@ public class RecetaAdapter extends RecyclerView.Adapter<RecetaAdapter.ViewHolder
     public void onBindViewHolder(
             @NonNull ViewHolderRecetas holder, int position) {
 
-        RecetaListado receta = listaItems.get(position);
+        Receta receta = listaItems.get(position);
 
         holder.txtNombre.setText(receta.getNombre());
-        holder.txtIngredientes.setText(receta.getIngredientes());
+        holder.txtIngredientes.setText(subtitulo(receta));
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(v.getContext(),
-                        receta.getNombre(),
-                        Toast.LENGTH_SHORT).show();
+        String imagen = receta.getImagenUrl();
+
+        if (imagen == null || imagen.isEmpty()) {
+            holder.imgReceta.setVisibility(View.GONE);
+        } else {
+            holder.imgReceta.setVisibility(View.VISIBLE);
+            Glide.with(holder.imgReceta.getContext())
+                    .load(imagen)
+                    .centerCrop()
+                    .into(holder.imgReceta);
+        }
+
+        holder.itemView.setOnClickListener(v -> listener.onReceta(receta));
+    }
+
+    /** Si vino del repositorio externo mostramos categoría y área; si es propia, los ingredientes. */
+    private String subtitulo(Receta receta) {
+
+        String categoria = receta.getCategoria();
+        String area = receta.getArea();
+
+        if (categoria != null && !categoria.isEmpty()) {
+
+            if (area != null && !area.isEmpty()) {
+                return categoria + " · " + area;
             }
-        });
+
+            return categoria;
+        }
+
+        return receta.getIngredientes();
     }
 
     @Override
