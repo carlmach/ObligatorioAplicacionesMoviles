@@ -3,7 +3,6 @@ package com.example.obligatorioappsmoviles;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.content.SharedPreferences;
 import android.widget.TextView;
 import android.content.Intent;
 import android.widget.Button;
@@ -33,6 +32,18 @@ public class MainActivity extends Activity {
         });
 
 
+        Button btnBuscar = findViewById(R.id.btnBuscarRecetas);
+
+        btnBuscar.setOnClickListener(v -> {
+            Intent intent = new Intent(
+                    MainActivity.this,
+                    BuscarRecetasActivity.class
+            );
+
+            startActivity(intent);
+        });
+
+
         Button btnAgregar = findViewById(R.id.btnAgregarReceta);
 
         btnAgregar.setOnClickListener(v -> {
@@ -44,6 +55,18 @@ public class MainActivity extends Activity {
             startActivity(intent);
         });
 
+        Button btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
+
+        btnCerrarSesion.setOnClickListener(v -> {
+            Prefs.cerrarSesion(this);
+
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+            startActivity(intent);
+            finish();
+        });
+
         txtUltimaReceta = findViewById(R.id.txtUltimaReceta);
     }
 
@@ -51,11 +74,7 @@ public class MainActivity extends Activity {
     protected void onResume() {
         super.onResume();
 
-        SharedPreferences preferences = getSharedPreferences(
-                "MiRecetarioPrefs", MODE_PRIVATE);
-
-        String ultimaReceta = preferences.getString(
-                "ultima_receta", "");
+        String ultimaReceta = Prefs.obtenerUltimaReceta(this);
 
         if (ultimaReceta.isEmpty()) {
             txtUltimaReceta.setText(R.string.ultima_receta);

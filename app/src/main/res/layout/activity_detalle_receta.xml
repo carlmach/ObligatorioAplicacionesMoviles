@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:fitsSystemWindows="true"
+    android:background="@color/boca_azul">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <ImageView
+            android:id="@+id/imgDetalle"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginBottom="16dp"
+            android:contentDescription="@string/descripcion_imagen"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:id="@+id/txtDetalleNombre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/boca_oro"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/txtDetalleCategoria"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/label_ingredientes"
+            android:textColor="@color/boca_oro"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/txtDetalleIngredientes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+            android:padding="16dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:background="@color/boca_azul_tarjeta"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/label_preparacion"
+            android:textColor="@color/boca_oro"
+            android:textStyle="bold"
+            android:textSize="18sp"/>
+
+        <TextView
+            android:id="@+id/txtDetallePreparacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="24dp"
+            android:padding="16dp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:background="@color/boca_azul_tarjeta"/>
+
+        <LinearLayout
+            android:id="@+id/bloqueNotas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/label_notas"
+                android:textColor="@color/boca_oro"
+                android:textStyle="bold"
+                android:textSize="18sp"/>
+
+            <EditText
+                android:id="@+id/edtNotas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="@string/hint_notas"
+                android:inputType="textMultiLine"
+                android:minLines="3"
+                android:gravity="top"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:textColorHint="#99FFFFFF"
+                android:background="@color/boca_azul_tarjeta"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnGuardarNotas"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/guardar_notas"
+            android:textColor="@color/boca_azul"
+            android:textStyle="bold"
+            android:backgroundTint="@color/boca_oro"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/btnAgregarColeccion"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/agregar_coleccion"
+            android:textColor="@color/boca_azul"
+            android:textStyle="bold"
+            android:backgroundTint="@color/boca_oro"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/btnEliminar"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/eliminar_receta"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:backgroundTint="#B03A2E"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/btnVolverDetalle"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/volver"
+            android:textColor="@color/boca_azul"
+            android:textStyle="bold"
+            android:backgroundTint="@color/boca_oro"/>
+
+    </LinearLayout>
+</ScrollView>

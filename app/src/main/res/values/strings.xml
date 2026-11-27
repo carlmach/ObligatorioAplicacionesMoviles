@@ -1,6 +1,28 @@
 
 <resources>
     <string name="app_name">Mi Recetario</string>
+
+    <!-- Login y registro -->
+    <string name="titulo_login">Iniciar sesión</string>
+    <string name="hint_email">Correo electrónico</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="hint_repetir_password">Repetir contraseña</string>
+    <string name="ingresar">Ingresar</string>
+    <string name="crear_cuenta">Crear cuenta</string>
+    <string name="titulo_registro">Crear cuenta</string>
+    <string name="registrar">Registrarme</string>
+    <string name="cerrar_sesion">Cerrar sesión</string>
+    <string name="error_email_vacio">Ingresá el correo</string>
+    <string name="error_email_formato">El correo no tiene un formato válido</string>
+    <string name="error_email_repetido">Ya existe una cuenta con ese correo</string>
+    <string name="error_password_vacia">Ingresá la contraseña</string>
+    <string name="error_password_corta">La contraseña necesita al menos %1$d caracteres</string>
+    <string name="error_password_distinta">Las contraseñas no coinciden</string>
+    <string name="error_credenciales">Correo o contraseña incorrectos</string>
+    <string name="error_registrar">No se pudo crear la cuenta</string>
+    <string name="registro_ok">Cuenta creada, ya podés ingresar</string>
+
+    <!-- Menú principal -->
     <string name="titulo_inicio">Mi Recetario</string>
     <string name="subtitulo_inicio">Todas tus recetas favoritas en un solo lugar</string>
     <string name="mis_recetas">Mis recetas</string>
@@ -8,17 +30,65 @@
     <string name="agregar_receta">Agregar receta</string>
     <string name="ultima_receta">Última receta: ninguna</string>
     <string name="ultima_receta_formato">Última receta: %1$s</string>
+
+    <!-- Agregar receta -->
     <string name="titulo_agregar">Agregar receta</string>
     <string name="hint_nombre">Nombre de la receta</string>
+    <string name="label_categoria">Categoría</string>
     <string name="hint_ingredientes">Ingredientes</string>
     <string name="hint_preparacion">Preparación paso a paso</string>
-    <string name="validar_receta">Validar receta</string>
+    <string name="validar_receta">Guardar receta</string>
     <string name="error_nombre">Ingresá el nombre</string>
+    <string name="error_nombre_corto">El nombre necesita al menos %1$d caracteres</string>
     <string name="error_ingredientes">Ingresá los ingredientes</string>
+    <string name="error_ingredientes_corto">Los ingredientes necesitan al menos %1$d caracteres</string>
     <string name="error_preparacion">Ingresá la preparación</string>
-    <string name="formulario_valido">Formulario válido. Pendiente guardar en SQLite.</string>
-    <string name="volver">Volver</string>
+    <string name="error_preparacion_corta">La preparación necesita al menos %1$d caracteres</string>
+    <string name="receta_guardada">Receta guardada</string>
+    <string name="error_guardar">No se pudo guardar la receta</string>
+
+    <!-- Mis recetas -->
     <string name="titulo_mis_recetas">Mis recetas</string>
-    <color name="boca_azul_tarjeta">#10457A</color>
+    <string name="sin_recetas">Todavía no agregaste ninguna receta</string>
+
+    <!-- Buscar -->
+    <string name="titulo_buscar">Buscar recetas</string>
+    <string name="hint_buscar">Nombre de la receta</string>
+    <string name="buscar">Buscar</string>
+    <string name="todas_las_categorias">Todas las categorías</string>
+    <string name="todas_las_areas">Todas las áreas</string>
+    <string name="error_buscar_vacio">Escribí un nombre o elegí un filtro</string>
+    <string name="sin_resultados">No se encontraron recetas</string>
+    <string name="error_conexion">No se pudo conectar con el servidor</string>
+
+    <!-- Detalle -->
+    <string name="label_ingredientes">Ingredientes</string>
+    <string name="label_preparacion">Preparación</string>
+    <string name="label_notas">Mis notas</string>
+    <string name="hint_notas">Anotá lo que quieras recordar de esta receta</string>
+    <string name="guardar_notas">Guardar notas</string>
+    <string name="notas_guardadas">Notas guardadas</string>
+    <string name="sin_categoria">Sin categoría</string>
+    <string name="eliminar_receta">Eliminar receta</string>
+    <string name="confirmar_eliminar">¿Seguro que querés eliminar \"%1$s\" de tu colección?</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="receta_eliminada">Receta eliminada</string>
+    <string name="agregar_coleccion">Agregar a mi colección</string>
+    <string name="receta_agregada">Receta agregada a tu colección</string>
+    <string name="receta_repetida">Esa receta ya está en tu colección</string>
+    <string name="error_receta_no_encontrada">No se encontró la receta</string>
+    <string name="descripcion_imagen">Foto de la receta</string>
+
+    <string name="volver">Volver</string>
+
+    <string-array name="categorias">
+        <item>Entrada</item>
+        <item>Plato principal</item>
+        <item>Guarnición</item>
+        <item>Postre</item>
+        <item>Bebida</item>
+        <item>Otra</item>
+    </string-array>
 
 </resources>

@@ -1,36 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- fitsSystemWindows pisa el padding de la vista donde se declara,
+     por eso el padding va en el contenedor de adentro. -->
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="24dp"
+    android:fitsSystemWindows="true"
     android:background="@color/boca_azul">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/titulo_mis_recetas"
-        android:textColor="@color/boca_oro"
-        android:textStyle="bold"
-        android:textSize="28sp"
-        android:gravity="center"
-        android:layout_marginBottom="24dp"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="24dp">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerRecetas"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/titulo_mis_recetas"
+            android:textColor="@color/boca_oro"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:gravity="center"
+            android:layout_marginBottom="24dp"/>
 
-    <Button
-        android:id="@+id/btnVolverMisRecetas"
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:layout_marginTop="16dp"
-        android:text="@string/volver"
-        android:textColor="@color/boca_azul"
-        android:textStyle="bold"
-        android:backgroundTint="@color/boca_oro"/>
+        <TextView
+            android:id="@+id/txtSinRecetas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sin_recetas"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerRecetas"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/btnVolverMisRecetas"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/volver"
+            android:textColor="@color/boca_azul"
+            android:textStyle="bold"
+            android:backgroundTint="@color/boca_oro"/>
+
+    </LinearLayout>
 
 </LinearLayout>

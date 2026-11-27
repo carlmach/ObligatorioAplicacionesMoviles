@@ -10,4 +10,5 @@
     <!-- Colores de nuestra aplicacion -->
     <color name="boca_azul">#002D62</color>
     <color name="boca_oro">#FFCC00</color>
+    <color name="boca_azul_tarjeta">#10457A</color>
 </resources>
