@@ -2,20 +2,32 @@
 package com.example.obligatorioappsmoviles;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.FirebaseNetworkException;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
+
+/**
+ * Alta de usuario en Firebase Authentication.
+ * Al crear la cuenta Firebase deja la sesión iniciada, así que se va directo al menú.
+ */
 public class RegistroActivity extends Activity {
 
+    // Firebase exige como mínimo 6 caracteres.
     private static final int LARGO_MINIMO_PASSWORD = 6;
 
     private EditText edtEmail;
     private EditText edtPassword;
     private EditText edtRepetir;
-    private UsuarioDao dao;
+    private Button btnRegistrar;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,13 +35,13 @@ public class RegistroActivity extends Activity {
 
         setContentView(R.layout.activity_registro);
 
-        dao = new UsuarioDao(this);
+        auth = FirebaseAuth.getInstance();
 
         edtEmail = findViewById(R.id.edtEmailRegistro);
         edtPassword = findViewById(R.id.edtPasswordRegistro);
         edtRepetir = findViewById(R.id.edtRepetirPassword);
 
-        Button btnRegistrar = findViewById(R.id.btnRegistrar);
+        btnRegistrar = findViewById(R.id.btnRegistrar);
         btnRegistrar.setOnClickListener(v -> registrar());
 
         Button btnVolver = findViewById(R.id.btnVolverRegistro);
@@ -67,23 +79,54 @@ public class RegistroActivity extends Activity {
             return;
         }
 
-        if (dao.existeEmail(email)) {
+        btnRegistrar.setEnabled(false);
+
+        auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, task -> {
+
+                    btnRegistrar.setEnabled(true);
+
+                    if (task.isSuccessful()) {
+                        Toast.makeText(this,
+                                R.string.registro_ok,
+                                Toast.LENGTH_SHORT).show();
+                        irAlMenu();
+                        return;
+                    }
+
+                    mostrarError(task.getException());
+                });
+    }
+
+    private void mostrarError(Exception e) {
+
+        if (e instanceof FirebaseAuthUserCollisionException) {
             edtEmail.setError(getString(R.string.error_email_repetido));
             edtEmail.requestFocus();
             return;
         }
 
-        if (dao.registrar(email, password) == -1) {
-            Toast.makeText(this,
-                    R.string.error_registrar,
-                    Toast.LENGTH_SHORT).show();
+        if (e instanceof FirebaseAuthWeakPasswordException) {
+            edtPassword.setError(getString(R.string.error_password_corta,
+                    LARGO_MINIMO_PASSWORD));
+            edtPassword.requestFocus();
             return;
         }
 
-        Toast.makeText(this,
-                R.string.registro_ok,
-                Toast.LENGTH_SHORT).show();
+        int mensaje = e instanceof FirebaseNetworkException
+                ? R.string.error_red
+                : R.string.error_registrar;
 
+        Toast.makeText(this, mensaje, Toast.LENGTH_SHORT).show();
+    }
+
+    private void irAlMenu() {
+
+        // Limpia la pila para que "atrás" no vuelva al login ni al registro.
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
+        startActivity(intent);
         finish();
     }
 }

@@ -7,6 +7,8 @@ import android.widget.TextView;
 import android.content.Intent;
 import android.widget.Button;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 
 
 public class MainActivity extends Activity {
@@ -58,7 +60,7 @@ public class MainActivity extends Activity {
         Button btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
 
         btnCerrarSesion.setOnClickListener(v -> {
-            Prefs.cerrarSesion(this);
+            FirebaseAuth.getInstance().signOut();
 
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
