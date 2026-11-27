@@ -9,11 +9,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.firebase.FirebaseNetworkException;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+
+/**
+ * Inicio de sesión contra Firebase Authentication (correo y contraseña).
+ * Firebase mantiene la sesión abierta entre ejecuciones de la app.
+ */
 public class LoginActivity extends Activity {
 
     private EditText edtEmail;
     private EditText edtPassword;
-    private UsuarioDao dao;
+    private Button btnIngresar;
+    private FirebaseAuth auth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,10 +31,10 @@ public class LoginActivity extends Activity {
 
         setContentView(R.layout.activity_login);
 
-        dao = new UsuarioDao(this);
+        auth = FirebaseAuth.getInstance();
 
         // Si ya había sesión abierta no volvemos a pedir credenciales.
-        if (!Prefs.obtenerSesion(this).isEmpty()) {
+        if (auth.getCurrentUser() != null) {
             irAlMenu();
             return;
         }
@@ -32,7 +42,7 @@ public class LoginActivity extends Activity {
         edtEmail = findViewById(R.id.edtEmailLogin);
         edtPassword = findViewById(R.id.edtPasswordLogin);
 
-        Button btnIngresar = findViewById(R.id.btnIngresar);
+        btnIngresar = findViewById(R.id.btnIngresar);
         btnIngresar.setOnClickListener(v -> ingresar());
 
         Button btnIrRegistro = findViewById(R.id.btnIrRegistro);
@@ -63,16 +73,37 @@ public class LoginActivity extends Activity {
             return;
         }
 
-        if (!dao.validarCredenciales(email, password)) {
-            Toast.makeText(this,
-                    R.string.error_credenciales,
-                    Toast.LENGTH_SHORT).show();
-            return;
+        // Evita dobles clics mientras Firebase responde.
+        btnIngresar.setEnabled(false);
+
+        auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, task -> {
+
+                    btnIngresar.setEnabled(true);
+
+                    if (task.isSuccessful()) {
+                        irAlMenu();
+                        return;
+                    }
+
+                    Toast.makeText(this,
+                            mensajeError(task.getException()),
+                            Toast.LENGTH_SHORT).show();
+                });
+    }
+
+    private int mensajeError(Exception e) {
+
+        if (e instanceof FirebaseNetworkException) {
+            return R.string.error_red;
         }
 
-        Prefs.guardarSesion(this, email);
+        if (e instanceof FirebaseAuthInvalidCredentialsException
+                || e instanceof FirebaseAuthInvalidUserException) {
+            return R.string.error_credenciales;
+        }
 
-        irAlMenu();
+        return R.string.error_autenticacion;
     }
 
     private void irAlMenu() {

@@ -6,8 +6,15 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 import java.util.ArrayList;
 
+/**
+ * Acceso a las recetas en SQLite. Cada receta pertenece al usuario de Firebase
+ * que la agregó: inserciones y listados usan siempre el uid de la sesión actual.
+ */
 public class RecetaDao {
 
     private final RecetaDbHelper helper;
@@ -20,6 +27,7 @@ public class RecetaDao {
 
         ContentValues valores = new ContentValues();
 
+        valores.put(RecetaDbHelper.COL_UID, uidActual());
         valores.put(RecetaDbHelper.COL_NOMBRE, receta.getNombre());
         valores.put(RecetaDbHelper.COL_CATEGORIA, receta.getCategoria());
         valores.put(RecetaDbHelper.COL_AREA, receta.getArea());
@@ -40,7 +48,10 @@ public class RecetaDao {
 
         Cursor cursor = db.query(
                 RecetaDbHelper.TABLA,
-                null, null, null, null, null,
+                null,
+                RecetaDbHelper.COL_UID + " = ?",
+                new String[]{uidActual()},
+                null, null,
                 RecetaDbHelper.COL_ID + " DESC"
         );
 
@@ -77,8 +88,9 @@ public class RecetaDao {
         Cursor cursor = db.query(
                 RecetaDbHelper.TABLA,
                 new String[]{RecetaDbHelper.COL_ID},
-                RecetaDbHelper.COL_ID_EXTERNO + " = ?",
-                new String[]{idExterno},
+                RecetaDbHelper.COL_ID_EXTERNO + " = ? AND " +
+                        RecetaDbHelper.COL_UID + " = ?",
+                new String[]{idExterno, uidActual()},
                 null, null, null
         );
 
@@ -113,6 +125,14 @@ public class RecetaDao {
                 RecetaDbHelper.COL_ID + " = ?",
                 new String[]{String.valueOf(id)}
         );
+    }
+
+    /** uid del usuario logueado en Firebase; vacío si no hay sesión. */
+    private String uidActual() {
+
+        FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
+
+        return usuario == null ? "" : usuario.getUid();
     }
 
     private ArrayList<Receta> leerTodas(Cursor cursor) {

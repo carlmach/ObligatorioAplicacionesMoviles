@@ -20,7 +20,9 @@
     <string name="error_password_distinta">Las contraseñas no coinciden</string>
     <string name="error_credenciales">Correo o contraseña incorrectos</string>
     <string name="error_registrar">No se pudo crear la cuenta</string>
-    <string name="registro_ok">Cuenta creada, ya podés ingresar</string>
+    <string name="registro_ok">Cuenta creada con éxito</string>
+    <string name="error_red">Sin conexión a internet. Probá de nuevo</string>
+    <string name="error_autenticacion">No se pudo iniciar sesión</string>
 
     <!-- Menú principal -->
     <string name="titulo_inicio">Mi Recetario</string>

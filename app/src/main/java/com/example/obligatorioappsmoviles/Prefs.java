@@ -4,24 +4,30 @@ package com.example.obligatorioappsmoviles;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+/**
+ * SharedPreferences de la app. La sesión ya no se guarda acá: la maneja Firebase.
+ * La última receta se guarda por usuario, para que cada cuenta vea la suya.
+ */
 public class Prefs {
 
     private static final String ARCHIVO = "MiRecetarioPrefs";
     private static final String CLAVE_ULTIMA_RECETA = "ultima_receta";
-    private static final String CLAVE_EMAIL = "email_usuario";
 
     public static void guardarUltimaReceta(Context context, String nombre) {
 
         preferencias(context)
                 .edit()
-                .putString(CLAVE_ULTIMA_RECETA, nombre)
+                .putString(claveUltimaReceta(), nombre)
                 .apply();
     }
 
     public static String obtenerUltimaReceta(Context context) {
 
         return preferencias(context)
-                .getString(CLAVE_ULTIMA_RECETA, "");
+                .getString(claveUltimaReceta(), "");
     }
 
     /** Si borran la receta que figuraba como última, el dato deja de tener sentido. */
@@ -30,31 +36,18 @@ public class Prefs {
         if (nombre.equals(obtenerUltimaReceta(context))) {
             preferencias(context)
                     .edit()
-                    .remove(CLAVE_ULTIMA_RECETA)
+                    .remove(claveUltimaReceta())
                     .apply();
         }
     }
 
-    public static void guardarSesion(Context context, String email) {
+    private static String claveUltimaReceta() {
 
-        preferencias(context)
-                .edit()
-                .putString(CLAVE_EMAIL, email)
-                .apply();
-    }
+        FirebaseUser usuario = FirebaseAuth.getInstance().getCurrentUser();
 
-    public static String obtenerSesion(Context context) {
-
-        return preferencias(context)
-                .getString(CLAVE_EMAIL, "");
-    }
-
-    public static void cerrarSesion(Context context) {
-
-        preferencias(context)
-                .edit()
-                .remove(CLAVE_EMAIL)
-                .apply();
+        return usuario == null
+                ? CLAVE_ULTIMA_RECETA
+                : CLAVE_ULTIMA_RECETA + "_" + usuario.getUid();
     }
 
     private static SharedPreferences preferencias(Context context) {
