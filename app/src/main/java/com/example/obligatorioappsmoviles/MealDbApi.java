@@ -40,10 +40,7 @@ public class MealDbApi {
         return leerRecetas("filter.php?a=" + codificar(area));
     }
 
-    /**
-     * filter.php sólo devuelve id, nombre e imagen. Para tener ingredientes
-     * e instrucciones hay que pedir la receta completa por su id.
-     */
+
     public static Receta obtenerPorIdExterno(String idExterno) throws IOException {
 
         ArrayList<Receta> recetas = leerRecetas("lookup.php?i=" + codificar(idExterno));
@@ -113,10 +110,7 @@ public class MealDbApi {
         return receta;
     }
 
-    /**
-     * La API no manda una lista de ingredientes: manda 20 pares sueltos
-     * strIngredient1..20 / strMeasure1..20, muchos vacíos.
-     */
+
     private static String armarIngredientes(JSONObject json) {
 
         StringBuilder texto = new StringBuilder();

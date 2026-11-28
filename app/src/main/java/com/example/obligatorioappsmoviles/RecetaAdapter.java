@@ -78,7 +78,7 @@ public class RecetaAdapter extends RecyclerView.Adapter<RecetaAdapter.ViewHolder
         holder.itemView.setOnClickListener(v -> listener.onReceta(receta));
     }
 
-    /** Si vino del repositorio externo mostramos categoría y área; si es propia, los ingredientes. */
+
     private String subtitulo(Receta receta) {
 
         String categoria = receta.getCategoria();

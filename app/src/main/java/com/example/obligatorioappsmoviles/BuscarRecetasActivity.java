@@ -18,10 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-/**
- * Busca en el repositorio externo (TheMealDB) por nombre, categoría o área.
- * Toda la red pasa por {@link Ejecutor}, nunca por el hilo principal.
- */
+
 public class BuscarRecetasActivity extends Activity {
 
     private EditText edtBuscar;
@@ -62,7 +59,7 @@ public class BuscarRecetasActivity extends Activity {
         cargarFiltros();
     }
 
-    /** Las categorías y áreas las da la propia API, no están hardcodeadas. */
+
     private void cargarFiltros() {
 
         Ejecutor.correr(MealDbApi::listarCategorias, new Ejecutor.Resultado<ArrayList<String>>() {
@@ -144,7 +141,7 @@ public class BuscarRecetasActivity extends Activity {
         });
     }
 
-    /** Devuelve null si el spinner está en la opción "todas". */
+
     private String seleccion(Spinner spinner, int idOpcionTodas) {
 
         if (spinner.getSelectedItem() == null) {

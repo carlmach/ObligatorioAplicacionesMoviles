@@ -14,10 +14,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 
-/**
- * Alta de usuario en Firebase Authentication.
- * Al crear la cuenta Firebase deja la sesión iniciada, así que se va directo al menú.
- */
+
 public class RegistroActivity extends Activity {
 
     // Firebase exige como mínimo 6 caracteres.
