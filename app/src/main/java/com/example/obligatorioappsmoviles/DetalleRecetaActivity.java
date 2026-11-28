@@ -13,11 +13,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
-/**
- * Muestra una receta en dos modos:
- * - propia (viene de SQLite): permite notas personalizadas y eliminar.
- * - externa (viene de TheMealDB): permite agregarla a la colección.
- */
+
 public class DetalleRecetaActivity extends Activity {
 
     public static final String EXTRA_ID_RECETA = "id_receta";

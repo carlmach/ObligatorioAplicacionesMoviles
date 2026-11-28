@@ -7,10 +7,7 @@ import android.os.Looper;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-/**
- * Corre la descarga en un hilo trabajador y devuelve el resultado
- * en el hilo principal, que es el único que puede tocar las vistas.
- */
+
 public class Ejecutor {
 
     public interface Tarea<T> {

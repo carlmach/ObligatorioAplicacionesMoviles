@@ -11,10 +11,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 
-/**
- * Acceso a las recetas en SQLite. Cada receta pertenece al usuario de Firebase
- * que la agregó: inserciones y listados usan siempre el uid de la sesión actual.
- */
+
 public class RecetaDao {
 
     private final RecetaDbHelper helper;

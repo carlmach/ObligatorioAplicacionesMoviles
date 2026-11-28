@@ -7,10 +7,7 @@ import android.content.SharedPreferences;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-/**
- * SharedPreferences de la app. La sesión ya no se guarda acá: la maneja Firebase.
- * La última receta se guarda por usuario, para que cada cuenta vea la suya.
- */
+
 public class Prefs {
 
     private static final String ARCHIVO = "MiRecetarioPrefs";
